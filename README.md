@@ -14,7 +14,7 @@
   Levantar as categorias mais vendidas e bem avaliadas correlacionado com as avaliações positiva dos consumidados definindo os   mercados mais promissores.
 
 # Planejamento das tarefas
-  - criação da github
+  - criação do repositório no github
   - escolha do banco de dados
   - tratamento do banco de dados
   - 
