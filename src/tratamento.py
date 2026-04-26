@@ -4,14 +4,14 @@ def carregar_e_tratar():
     df = pd.read_csv("data/amazonOriginal.csv")
 
 
- #abaixo selecionamos somente as colunas que iremos usar para tratamento e criação do dashboard   
+   #abaixo selecionamos somente as colunas que iremos usar para tratamento e criação do dashboard   
     df = df [
         ["product_id", "product_name", "category", 
              "discounted_price", "discount_percentage", 
              "rating", "rating_count",]
     ]
 
- #abaixo traduzimos do termo tecnico para linguagem comercial para fins de montagem do dashboard   
+    #abaixo traduzimos do termo tecnico para linguagem comercial para fins de montagem do dashboard   
     df.columns = [
     "codigo",
     "produto",
@@ -118,9 +118,8 @@ def carregar_e_tratar():
             "valor_total_vendas"
         ]
     ]
-
-
-
+    df["tipo_produto"] = df["tipo_produto"].str.title()
+    
     print(list(df.columns))
     print(df.dtypes)
     print(df.head())
@@ -130,6 +129,10 @@ def carregar_e_tratar():
     print(df.columns)
     print(df["tipo_produto"].value_counts())
     print(df[["produto", "tipo_produto"]].head(10))
+
+
+
+    df.columns = df.columns.str.upper()
 
 
 
