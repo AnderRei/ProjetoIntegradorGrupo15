@@ -132,7 +132,8 @@ def carregar_e_tratar():
 
 
 
-    df.columns = df.columns.str.upper()
+    #df.columns = df.columns.str.upper()
+    df.columns = df.columns.str.lower()
 
 
 
