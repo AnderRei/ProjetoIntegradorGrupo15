@@ -12,21 +12,27 @@ st.title("📊 Dashboard - Produtos Amazon")
 # =========================
 df = carregar_e_tratar()
 
-# Debug (ver as colunas disponíveis)
-#st.write(df.columns)
-
 # =========================
-# FILTRO
+# FILTROS
 # =========================
 st.sidebar.header("🔎 Filtros")
 
 categorias = st.sidebar.multiselect(
-    "Selecione categorias:",
-    options=df["categoria"].unique(),
-    default=df["categoria"].unique()
+    "Categoria:",
+    options=sorted(df["categoria"].unique()),
+    default=sorted(df["categoria"].unique())
 )
 
-df_filtrado = df[df["categoria"].isin(categorias)]
+tipos = st.sidebar.multiselect(
+    "Tipo de Produto:",
+    options=sorted(df["tipo_produto"].unique()),
+    default=sorted(df["tipo_produto"].unique())
+)
+
+df_filtrado = df[
+    (df["categoria"].isin(categorias)) &
+    (df["tipo_produto"].isin(tipos))
+]
 
 # =========================
 # AGRUPAMENTO
@@ -34,14 +40,15 @@ df_filtrado = df[df["categoria"].isin(categorias)]
 resumo = df_filtrado.groupby("categoria").agg({
     "avaliacao": "mean",
     "qtd_avaliacoes": "sum",
-    "codigo": "count"
+    "codigo": "count",
+    "valor_total_vendas": "sum"
 }).reset_index()
 
-# Renomear corretamente
 resumo = resumo.rename(columns={
     "avaliacao": "rating_medio",
     "qtd_avaliacoes": "total_avaliacoes",
-    "codigo": "total_produtos"
+    "codigo": "total_produtos",
+    "valor_total_vendas": "vendas_totais"
 })
 
 # =========================
@@ -54,11 +61,12 @@ resumo["potencial"] = resumo["rating_medio"] * np.log1p(resumo["total_avaliacoes
 # =========================
 st.subheader("📈 Visão Geral")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Total de Produtos", df_filtrado.shape[0])
-col2.metric("Total de Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
-col3.metric("Categorias", df_filtrado["categoria"].nunique())
+col1.metric("📦 Produtos", df_filtrado.shape[0])
+col2.metric("⭐ Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
+col3.metric("📂 Categorias", df_filtrado["categoria"].nunique())
+col4.metric("💰 Vendas (estimado)", f"{df_filtrado['valor_total_vendas'].sum():,.0f}")
 
 # =========================
 # TOP 5 CATEGORIAS
@@ -74,7 +82,7 @@ st.dataframe(top5)
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("🔥 Popularidade")
+    st.subheader("🔥 Popularidade (Avaliações)")
     st.bar_chart(
         resumo.set_index("categoria")["total_avaliacoes"]
     )
@@ -86,10 +94,34 @@ with col2:
     )
 
 # =========================
-# TABELA COMPLETA
+# GRÁFICO DE VENDAS
+# =========================
+st.subheader("💰 Vendas por Categoria")
+
+st.bar_chart(
+    resumo.set_index("categoria")["vendas_totais"]
+)
+
+# =========================
+# TIPO DE PRODUTO
+# =========================
+st.subheader("📦 Distribuição por Tipo de Produto")
+
+st.bar_chart(
+    df_filtrado["tipo_produto"].value_counts()
+)
+
+# =========================
+# RANKING COMPLETO
 # =========================
 st.subheader("📊 Ranking Geral")
 
 st.dataframe(
     resumo.sort_values(by="potencial", ascending=False)
 )
+
+# =========================
+# TABELA DETALHADA 
+# =========================
+with st.expander("🔍 Ver dados detalhados"):
+    st.dataframe(df_filtrado)
