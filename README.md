@@ -49,5 +49,89 @@ https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset/data
   A seguir apresento como será  o fluxo do ETL :
   Kaggle -> Extração -> Transformação (pandas) -> Dados tratados -> Dashboard
 
-## Ideia inicial do dashboard
-  O dashboard será planejado a partir de um banco de dados da Amazon que reúne informações básicas dos produtos, como código, nome, categoria, preços, quantidade do produto em estoque, percentual de desconto e avaliação dos clientes. A proposta do dashboard é organizar esses dados de forma simples e clara, facilitando a visualização e a comparação entre os produtos disponíveis. As métricas utilizadas serão compatíveis com as informações da base, incluindo o total de produtos analisados, o preço médio normal, o preço médio com desconto, a quantidade total de produtos em estoque, o desconto médio aplicado e a avaliação média dos consumidores, que serão apresentados como indicadores para oferecer uma visão geral dos dados. Para a parte visual, serão utilizados gráficos de barras para comparar as categorias em relação à quantidade de produtos, preços médios, descontos e avaliações dos clientes, além de um gráfico de pizza para mostrar a distribuição dos produtos por categoria e um gráfico de dispersão para observar a relação entre o preço com desconto e a avaliação do cliente. O dashboard terá interatividade, permitindo que o usuário aplique filtros e altere as visualizações, fazendo com que gráficos e indicadores se atualizem automaticamente conforme as escolhas realizadas, tornando a análise mais dinâmica e facilitando o entendimento das informações apresentadas.
+## Dashboard Interativo
+  Foi desenvolvido um dashboard interativo utilizando a biblioteca Streamlit com o objetivo de apresentar, de forma visual e analítica, os principais insights obtidos na análise dos dados da Amazon.
+
+  A aplicação permite visualização dinâmica das informações, facilitando a interpretação dos resultados, identificação de padrões e apoio à tomada de decisão baseada em dados.
+
+### Filtro Interativos
+  Foram implementados filtros interativos utilizando componentes nativos do Streamlit.
+
+  O usuário pode filtrar os dados por:
+     - Categoria de produto
+     - Tipo de produto
+  Essa funcionalidade permite explorar diferentes cenários, analisar segmentos específicos e compreender melhor o comportamento de cada grupo de produtos.
+
+### Métricas Gerais
+  Foram criadas métricas principais para fornecer uma visão geral do dataset:
+    - Total de produtos analisados
+    - Total de avaliações
+    - Número de categorias
+    - Ticket médio dos produtos
+  Os valores monetários foram convertidos de Rúpia Indiana (INR) para Real Brasileiro (BRL), garantindo maior aderência ao contexto de análise.
+  Essas métricas permitem rápida compreensão sobre volume, relevância e impacto financeiro dos dados.
+
+### Agrupamento de Dados
+  Os dados foram agrupados por categoria utilizando funções de agregação para calcular:
+    - Média das avaliações (qualidade)
+    - Soma da quantidade de avaliações (popularidade)
+    - Quantidade total de produtos por categoria
+    - Soma do valor total estimado de vendas
+    - Ticket médio por categoria
+Essa etapa permite comparação consistente entre diferentes categorias de produtos.
+
+### Score Inteligente (Modelo Bayesiano)
+ Foi implementado um modelo de pontuação baseado em abordagem bayesiana para ranquear categorias com maior robustez analítica.
+  O score considera:
+    - Qualidade (média das avaliações)
+    - Popularidade (volume de avaliações)
+    - Média global do dataset
+  Esse modelo reduz distorções geradas por categorias com poucas avaliações e melhora a confiabilidade do ranking.
+  Além disso, foi criado um score final composto por:
+    - Score bayesiano
+    - Volume de avaliações (escala logarítmica)
+    - Valor total estimado de vendas (escala logarítmica)
+  Essa abordagem proporciona análise mais equilibrada e orientada ao negócio.
+
+### Ranking de Categoria
+  Foi desenvolvido um ranking de categorias com base no score final.
+  Esse ranking permite identificar rapidamente quais setores apresentam maior relevância, qualidade e potencial de mercado dentro da base analisada.
+
+### Visualizações Gráficas
+  Foram implementadas visualizações para facilitar análise exploratória e interpretação dos dados:
+    - Gráfico de barras de popularidade por categoria
+    - Gráfico de barras de avaliação média por categoria
+    - Gráfico de barras de receita estimada por categoria
+  Gráficos de dispersão:
+    - Avaliação vs Popularidade
+    - Desconto vs Avaliação
+  Essas visualizações permitem identificar relações, padrões e oportunidades de mercado de forma intuitiva.
+
+### Análise de Produtos
+  O dashboard também apresenta análise individual de produtos, incluindo:
+    - Ranking dos produtos com maior valor estimado de vendas
+    - Categoria
+    - Tipo de produto
+    - Preço com desconto
+    - Avaliação
+  Essa análise permite visão mais granular além do agrupamento por categorias.
+
+### Interação com Tratamento de Dados
+  O dashboard foi desenvolvido de forma integrada com a etapa de tratamento e preparação dos dados (ETL).
+  As colunas geradas durante o processo são utilizadas diretamente nas análises, incluindo:
+    - tipo_produto
+    - valor_total_vendas
+    - preco_desconto
+    - perc_desconto
+  Além disso, foi realizada conversão monetária para garantir consistência analítica e adequação ao contexto brasileiro.
+  Essa integração garante coerência entre as etapas do projeto e maior confiabilidade nos resultados.
+
+
+
+
+
+
+
+ 
+
+
