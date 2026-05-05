@@ -19,14 +19,14 @@ st.sidebar.header("🔎 Filtros")
 
 categorias = st.sidebar.multiselect(
     "Categoria",
-    options=df["categoria"].unique(),
-    default=df["categoria"].unique()
+    options=sorted(df["categoria"].unique()),
+    default=sorted(df["categoria"].unique())
 )
 
 tipos = st.sidebar.multiselect(
     "Tipo de Produto",
-    options=df["tipo_produto"].unique(),
-    default=df["tipo_produto"].unique()
+    options=sorted(df["tipo_produto"].unique()),
+    default=sorted(df["tipo_produto"].unique())
 )
 
 df_filtrado = df[
@@ -76,15 +76,14 @@ st.subheader("📈 Visão Geral")
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Produtos", df_filtrado.shape[0])
-col2.metric("Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
-col3.metric("Categorias", df_filtrado["categoria"].nunique())
+col1.metric("📦 Produtos", df_filtrado.shape[0])
+col2.metric("⭐ Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
+col3.metric("📂 Categorias", df_filtrado["categoria"].nunique())
 
 valor = df_filtrado["preco_desconto"].mean()
 valor_formatado = f"R$ {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
-col4.metric("Ticket Médio", valor_formatado)
-
+col4.metric("💰 Ticket Médio", valor_formatado)
 
 # =========================
 # TOP CATEGORIAS
@@ -168,3 +167,9 @@ st.subheader("📊 Ranking Geral Completo")
 st.dataframe(
     resumo.sort_values(by="score_final", ascending=False)
 )
+
+# =========================
+# TABELA DETALHADA
+# =========================
+with st.expander("🔍 Ver dados detalhados"):
+    st.dataframe(df_filtrado)
