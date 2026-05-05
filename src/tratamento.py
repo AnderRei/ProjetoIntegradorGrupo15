@@ -32,6 +32,10 @@ def carregar_e_tratar():
     .str.replace("₹", "") \
     .str.replace(",", "") \
     .astype(float)
+    
+    # converter moeda
+    taxa_inr_brl = 0.06 # taxa aproximada (INR → BRL)
+    df["preco_desconto"] = df["preco_desconto"] * taxa_inr_brl
    
     # remover símbolo de porcentagem
     df["perc_desconto"] = df["perc_desconto"] \
@@ -135,7 +139,8 @@ def carregar_e_tratar():
     #df.columns = df.columns.str.upper()
     df.columns = df.columns.str.lower()
 
-
+    # remover nulos
+    df = df.dropna(subset=["avaliacao", "qtd_avaliacoes", "valor_total_vendas"])
 
 
     df.to_csv("data/amazon_tratado.csv", index=False)
