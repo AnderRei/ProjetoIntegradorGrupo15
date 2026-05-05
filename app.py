@@ -88,11 +88,11 @@ col4.metric("💰 Ticket Médio", valor_formatado)
 # =========================
 # TOP CATEGORIAS
 # =========================
-st.subheader("🏆 Ranking de Categorias")
+st.subheader("🏆 Ranking de Categorias - Top 5")
 
 top = resumo.sort_values(by="score_final", ascending=False)
 
-st.dataframe(top.head(10))
+st.dataframe(top.head(5))
 
 # =========================
 # GRÁFICOS PRINCIPAIS
