@@ -5,7 +5,7 @@ from src.tratamento import carregar_e_tratar
 
 st.set_page_config(layout="wide")
 
-st.title("📊 Dashboard - Análise de Mercado Amazon")
+st.title(" Dashboard - Análise de Mercado Amazon ")
 
 # =========================
 # CARREGAR DADOS
@@ -15,7 +15,7 @@ df = carregar_e_tratar()
 # =========================
 # FILTROS
 # =========================
-st.sidebar.header("🔎 Filtros")
+st.sidebar.header(" Filtros")
 
 categorias = st.sidebar.multiselect(
     "Categoria",
@@ -72,23 +72,23 @@ resumo["score_final"] = (
 # =========================
 # MÉTRICAS GERAIS
 # =========================
-st.subheader("📈 Visão Geral")
+st.subheader(" Visão Geral")
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("📦 Produtos", df_filtrado.shape[0])
-col2.metric("⭐ Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
-col3.metric("📂 Categorias", df_filtrado["categoria"].nunique())
+col1.metric(" Produtos", df_filtrado.shape[0])
+col2.metric(" Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
+col3.metric(" Categorias", df_filtrado["categoria"].nunique())
 
 valor = df_filtrado["preco_desconto"].mean()
 valor_formatado = f"R$ {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
-col4.metric("💰 Ticket Médio", valor_formatado)
+col4.metric(" Ticket Médio", valor_formatado)
 
 # =========================
 # TOP CATEGORIAS
 # =========================
-st.subheader("🏆 Ranking de Categorias - Top 5")
+st.subheader(" Ranking de Categorias - Top 5")
 
 top = resumo.sort_values(by="score_final", ascending=False)
 
@@ -100,13 +100,13 @@ st.dataframe(top.head(5))
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("🔥 Popularidade (Avaliações)")
+    st.subheader(" Popularidade (Avaliações)")
     st.bar_chart(
         resumo.set_index("categoria")["total_avaliacoes"]
     )
 
 with col2:
-    st.subheader("⭐ Qualidade (Rating Médio)")
+    st.subheader(" Qualidade (Rating Médio)")
     st.bar_chart(
         resumo.set_index("categoria")["rating_medio"]
     )
@@ -114,7 +114,7 @@ with col2:
 # =========================
 # SCATTER INSIGHTS
 # =========================
-st.subheader("📍 Avaliação vs Popularidade")
+st.subheader(" Avaliação vs Popularidade")
 
 st.scatter_chart(
     df_filtrado,
@@ -122,7 +122,7 @@ st.scatter_chart(
     y="avaliacao"
 )
 
-st.subheader("🏷️ Desconto vs Avaliação")
+st.subheader(" Desconto vs Avaliação")
 
 st.scatter_chart(
     df_filtrado,
@@ -133,7 +133,7 @@ st.scatter_chart(
 # =========================
 # RECEITA POR CATEGORIA
 # =========================
-st.subheader("💰 Receita Estimada por Categoria")
+st.subheader(" Receita Estimada por Categoria")
 
 st.bar_chart(
     resumo.set_index("categoria")["valor_total_vendas"]
@@ -142,7 +142,7 @@ st.bar_chart(
 # =========================
 # TOP PRODUTOS
 # =========================
-st.subheader("💎 Top Produtos")
+st.subheader(" Top Produtos")
 
 top_produtos = df_filtrado.sort_values(
     by="valor_total_vendas", ascending=False
@@ -162,7 +162,7 @@ st.dataframe(
 # =========================
 # RANKING COMPLETO
 # =========================
-st.subheader("📊 Ranking Geral Completo")
+st.subheader(" Ranking Geral Completo")
 
 st.dataframe(
     resumo.sort_values(by="score_final", ascending=False)
@@ -171,5 +171,10 @@ st.dataframe(
 # =========================
 # TABELA DETALHADA
 # =========================
-with st.expander("🔍 Ver dados detalhados"):
+with st.expander(" Ver dados detalhados"):
     st.dataframe(df_filtrado)
+
+
+# =========================
+# cria um terminal interativo para o usuário conseguir abrir o streamlit 
+# =========================
