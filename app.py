@@ -174,7 +174,3 @@ st.dataframe(
 with st.expander(" Ver dados detalhados"):
     st.dataframe(df_filtrado)
 
-
-# =========================
-# cria um terminal interativo para o usuário conseguir abrir o streamlit 
-# =========================
