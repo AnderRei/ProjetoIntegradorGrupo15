@@ -5,7 +5,7 @@ from src.tratamento import carregar_e_tratar
 
 st.set_page_config(layout="wide")
 
-st.title("📊 Dashboard - Análise de Mercado Amazon")
+st.title(" Dashboard - Análise de Mercado Amazon ")
 
 # =========================
 # CARREGAR DADOS
@@ -15,7 +15,7 @@ df = carregar_e_tratar()
 # =========================
 # FILTROS
 # =========================
-st.sidebar.header("🔎 Filtros")
+st.sidebar.header(" Filtros")
 
 categorias = st.sidebar.multiselect(
     "Categoria",
@@ -81,15 +81,13 @@ resumo["score_final"] = (
 # =========================
 # MÉTRICAS GERAIS
 # =========================
-st.subheader("📈 Visão Geral")
+st.subheader(" Visão Geral")
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Produtos", df_filtrado.shape[0])
-
-col2.metric("Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
-
-col3.metric("Categorias", df_filtrado["categoria"].nunique())
+col1.metric(" Produtos", df_filtrado.shape[0])
+col2.metric(" Avaliações", int(df_filtrado["qtd_avaliacoes"].sum()))
+col3.metric(" Categorias", df_filtrado["categoria"].nunique())
 
 valor = df_filtrado["preco_desconto"].mean()
 
@@ -102,7 +100,7 @@ col4.metric("Ticket Médio", valor_formatado)
 # =========================
 # COMENTÁRIOS GERAIS
 # =========================
-st.subheader("📝 Observações da Análise")
+st.subheader(" Observações da Análise")
 
 top_categoria = resumo.sort_values(
     by="score_final",
@@ -154,7 +152,7 @@ st.write(
 # =========================
 # RANKING DE CATEGORIAS
 # =========================
-st.subheader("🏆 Ranking de Categorias - Top 5")
+st.subheader(" Ranking de Categorias - Top 5")
 
 top = resumo.sort_values(by="score_final", ascending=False)
 
@@ -166,37 +164,39 @@ st.dataframe(top.head(5))
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("🔥 Popularidade por Categoria")
-
-    st.bar_chart(resumo.set_index("categoria")["total_avaliacoes"])
+    st.subheader(" Popularidade (Avaliações)")
+    st.bar_chart(
+        resumo.set_index("categoria")["total_avaliacoes"]
+    )
 
 with col2:
-    st.subheader("⭐ Avaliação Média por Categoria")
-
-    st.bar_chart(resumo.set_index("categoria")["rating_medio"])
+    st.subheader(" Qualidade (Rating Médio)")
+    st.bar_chart(
+        resumo.set_index("categoria")["rating_medio"]
+    )
 
 # =========================
 # RELAÇÃO ENTRE DADOS
 # =========================
-st.subheader("📍 Avaliação x Popularidade")
+st.subheader(" Avaliação vs Popularidade")
 
 st.scatter_chart(df_filtrado, x="qtd_avaliacoes", y="avaliacao")
 
-st.subheader("🏷️ Desconto x Avaliação")
+st.subheader(" Desconto vs Avaliação")
 
 st.scatter_chart(df_filtrado, x="perc_desconto", y="avaliacao")
 
 # =========================
 # RECEITA POR CATEGORIA
 # =========================
-st.subheader("💰 Receita Estimada por Categoria")
+st.subheader(" Receita Estimada por Categoria")
 
 st.bar_chart(resumo.set_index("categoria")["valor_total_vendas"])
 
 # =========================
 # TOP PRODUTOS
 # =========================
-st.subheader("💎 Produtos com Maior Valor Estimado de Vendas")
+st.subheader(" Top Produtos")
 
 top_produtos = df_filtrado.sort_values(by="valor_total_vendas", ascending=False).head(
     10
@@ -218,12 +218,13 @@ st.dataframe(
 # =========================
 # RANKING COMPLETO
 # =========================
-st.subheader("📊 Ranking Geral das Categorias")
+st.subheader(" Ranking Geral Completo")
 
 st.dataframe(resumo.sort_values(by="score_final", ascending=False))
 
 # =========================
 # DADOS DETALHADOS
 # =========================
-with st.expander("🔍 Ver dados detalhados"):
+with st.expander(" Ver dados detalhados"):
     st.dataframe(df_filtrado)
+
