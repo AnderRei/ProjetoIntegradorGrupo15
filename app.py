@@ -100,7 +100,7 @@ col4.metric("Ticket Médio", valor_formatado)
 # =========================
 # COMENTÁRIOS GERAIS
 # =========================
-st.subheader("📝 Observações da Análise")
+st.subheader(" Observações da Análise")
 
 top_categoria = resumo.sort_values(
     by="score_final",
