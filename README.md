@@ -157,7 +157,7 @@ Em relação à **viabilidade técnica**, o projeto é plenamente executável de
 
 Para atender aos requisitos de desenvolvimento e validação da aplicação *low code*, o painel interativo foi publicado em nuvem, permitindo o acesso de qualquer dispositivo sem a necessidade de configurações locais.
 
-link da solução publicada:
+link da solução publicada: https://projetointegradorgrupo15.streamlit.app/
 
  
 
