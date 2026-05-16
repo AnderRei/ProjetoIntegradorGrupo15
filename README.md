@@ -71,6 +71,9 @@ https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset/data
   Foi desenvolvido um dashboard interativo utilizando a biblioteca Streamlit com o objetivo de apresentar, de forma visual e analítica, os principais insights obtidos na análise dos dados da Amazon.
 
   A aplicação permite visualização dinâmica das informações, facilitando a interpretação dos resultados, identificação de padrões e apoio à tomada de decisão baseada em dados.
+  
+<img width="1508" height="673" alt="image" src="https://github.com/user-attachments/assets/41128230-65f1-4067-a3ef-11ff6588404a" />
+
 
 ### Filtro Interativos
   Foram implementados filtros interativos utilizando componentes nativos do Streamlit.
@@ -144,11 +147,17 @@ Essa etapa permite comparação consistente entre diferentes categorias de produ
   Além disso, foi realizada conversão monetária para garantir consistência analítica e adequação ao contexto brasileiro.
   Essa integração garante coerência entre as etapas do projeto e maior confiabilidade nos resultados.
 
+### Viabilidade Técnica e Econômica
 
+O projeto apresenta **alta viabilidade econômica**, uma vez que foi idealizado e desenvolvido integralmente com o uso de tecnologias de código aberto (*open source*) e plataformas gratuitas. A linguagem Python, juntamente com as bibliotecas nativas e externas (como Pandas e Streamlit), não exige custos de licenciamento. Além disso, o controle de versão e armazenamento do código são realizados gratuitamente via GitHub, e o *deploy* da aplicação pode ser hospedado na camada gratuita do Streamlit Community Cloud. Portanto, o custo operacional e de infraestrutura do projeto é zero.
 
+Em relação à **viabilidade técnica**, o projeto é plenamente executável dentro do escopo estabelecido. A base de dados selecionada no Kaggle é estruturada, rica em atributos e adequada para o volume de processamento pretendido. A equipe detém os conhecimentos fundamentais adquiridos nas disciplinas de Práticas de Programação, Banco de Dados e Introdução à Ciência de Dados, o que garante a capacidade técnica para realizar os processos de extração, transformação e carga (ETL), bem como o desenvolvimento da interface interativa *low code* dentro do cronograma estipulado.
 
+## Solução Publicada e Execução do Projeto
 
+Para atender aos requisitos de desenvolvimento e validação da aplicação *low code*, o painel interativo foi publicado em nuvem, permitindo o acesso de qualquer dispositivo sem a necessidade de configurações locais.
 
+link da solução publicada:
 
  
 
