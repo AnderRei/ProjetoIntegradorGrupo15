@@ -153,12 +153,110 @@ O projeto apresenta **alta viabilidade econômica**, uma vez que foi idealizado 
 
 Em relação à **viabilidade técnica**, o projeto é plenamente executável dentro do escopo estabelecido. A base de dados selecionada no Kaggle é estruturada, rica em atributos e adequada para o volume de processamento pretendido. A equipe detém os conhecimentos fundamentais adquiridos nas disciplinas de Práticas de Programação, Banco de Dados e Introdução à Ciência de Dados, o que garante a capacidade técnica para realizar os processos de extração, transformação e carga (ETL), bem como o desenvolvimento da interface interativa *low code* dentro do cronograma estipulado.
 
+# Como Executar o Projeto
+
+
+## 1. Clonar o repositório
+
+Clone o projeto para sua máquina e acesse a pasta:
+
+```bash
+git clone https://github.com/AnderRei/ProjetoIntegradorGrupo15.git
+cd ProjetoIntegradorGrupo15-main
+```
+
+---
+
+## 2. Criar o ambiente virtual
+
+Crie um ambiente virtual para isolar as dependências do projeto:
+
+```bash
+python -m venv venv
+```
+
+---
+
+## 3. Ativar o ambiente virtual
+
+### Windows (PowerShell)
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+### Windows (CMD)
+
+```cmd
+venv\Scripts\activate.bat
+```
+
+### Linux/macOS
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## 4. Instalar as dependências
+
+Instale todas as bibliotecas necessárias utilizando o arquivo `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 5. Executar o tratamento de dados (Opcional)
+
+Caso seja necessário gerar novamente a base de dados tratada:
+
+```bash
+python src/tratamento.py
+```
+
+---
+
+## 6. Executar o dashboard
+
+Para iniciar o dashboard interativo no navegador:
+
+```bash
+streamlit run app.py
+```
+
+O Streamlit exibirá no terminal um endereço semelhante a:
+
+```text
+http://localhost:8501
+```
+
+Após executar o comando, o projeto será aberto automaticamente no navegador padrão.
+
+---
+
+# Observações
+
+- O projeto utiliza a biblioteca `Streamlit` para criação do dashboard interativo.
+- O comando correto para iniciar a aplicação é:
+
+```bash
+streamlit run app.py
+```
+
+- Não é recomendado executar o arquivo diretamente com:
+
+```bash
+python app.py
+```
+
+pois aplicações Streamlit precisam ser iniciadas pelo servidor do framework, e executar o arquivo diretamente pode causar erros de funcionamento.
+
+
 ## Solução Publicada e Execução do Projeto
 
 Para atender aos requisitos de desenvolvimento e validação da aplicação *low code*, o painel interativo foi publicado em nuvem, permitindo o acesso de qualquer dispositivo sem a necessidade de configurações locais.
 
 link da solução publicada: https://projetointegradorgrupo15.streamlit.app/
-
- 
-
-
